@@ -1,9 +1,9 @@
 import { Answer } from "./Answer";
 
 export type Question = {
-  Id: number,
-  Detail: string,
-  CorrectAnswer: string,
-  Answers: Answer[],
-  Answered: boolean,
+  id: number,
+  detail: string,
+  correctAnswer: string,
+  answers: Answer[],
+  answered: boolean,
 }
