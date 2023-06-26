@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Answer } from '../types/Answer'
 import TriviaAnswer from './TriviaAnswer'
+import { decode } from 'html-entities'
 
 interface Props {
   id: number,
@@ -39,7 +40,7 @@ const TriviaQuestion : React.FC<Props> = (Props) => {
     
     <div className="w-2/3 m-6">
       
-      <p className="text-gray-900">{Props.detail}</p>
+      <p className="text-gray-900">{decode(`${Props.detail}`,{level:'html5'})}</p>
         <div className="answers flex">
           {
             answers.map(a => (

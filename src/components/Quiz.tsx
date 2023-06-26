@@ -3,6 +3,7 @@ import React from 'react'
 import { Question } from '../types/Question'
 import TriviaQuestion from './TriviaQuestion'
 
+
 interface Props {
   questions: Question[]
 }

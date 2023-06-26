@@ -4,6 +4,7 @@ import { Question } from './types/Question'
 import Quiz from './components/Quiz'
 import { Answer } from './types/Answer'
 
+
 interface TriviaQuestion {
   category: string,
   type: string,
