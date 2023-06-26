@@ -27,8 +27,8 @@ function App() {
       const res = await fetch(url)
       const data = await res.json()
       const mappedQuestions: Question[] = data.results.map((q:TriviaQuestion, index: number) => {
-        const answers: Answer[] = [...q.incorrect_answers, q.correct_answer].map(answer => {
-          return {text: answer, correct: answer === q.correct_answer, isSelected: false}
+        const answers: Answer[] = [...q.incorrect_answers, q.correct_answer].map((answer,idx) => {
+          return {id: idx, text: answer, correct: answer === q.correct_answer, isSelected: false}
         })
         return {
           id: index,

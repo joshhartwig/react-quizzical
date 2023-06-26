@@ -7,12 +7,16 @@ interface Props {
   questions: Question[]
 }
 
+/*
+  TODO: create use effect to check if every question is answered if so allow the next button and calc results
+*/
+
 const Quiz: React.FC<Props> = (Props) => {
   return (
     <>
       {
         Props.questions.map(q => (
-          <TriviaQuestion id={q.id} detail={q.detail} correctAnswer={q.correctAnswer} />
+          <TriviaQuestion id={q.id} detail={q.detail} correctAnswer={q.correctAnswer} answers={q.answers} answered={q.answered} />
         ))
       }
       
