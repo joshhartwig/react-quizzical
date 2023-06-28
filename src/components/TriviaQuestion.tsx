@@ -9,17 +9,30 @@ interface Props {
   correctAnswer: string,
   answers: Answer[]
   answered?: boolean,
+  gameOver: boolean,
 }
 
 
 const TriviaQuestion : React.FC<Props> = (Props) => {
 
-  const [answers, setAnswers] = useState<Answer[]>([])
-  const [answered,setAnswered] = useState(false)
+  const [answers, setAnswers] = useState<Answer[]>([])  // our list of answers
+  const [correctAnswer, setCorrectAnswer] = useState<string>(''); // contains the correct answer for the question
+  const [proposedAnswer, setProposedAnswer] = useState<string>('');
+  const [answered,setAnswered] = useState(false)  // has the question been answered?
   
   useEffect(() => {
     setAnswers(Props.answers)
+    setCorrectAnswer(Props.correctAnswer)
+
   },[])
+
+  useEffect(() => {
+    if(answered) {
+      if(proposedAnswer === correctAnswer) {
+        console.log(`selected correct answer`)
+      }
+    }
+  },[answered,proposedAnswer,correctAnswer])
 
   const toggle = (id: number) => {
     setAnswers(prev => {
@@ -28,23 +41,26 @@ const TriviaQuestion : React.FC<Props> = (Props) => {
       })
     })
     setAnswered(true) 
-  }
-
-  // this is probably hacky idea, i did this because the method signature was not matching the props
-  // i was not able to have a nullabe type as function in the prop
-  const doNothing = () => {
-    return;
+    setProposedAnswer(answers[id].text)
   }
 
   return (
     
     <div className="w-2/3 m-6">
       
-      <p className="text-gray-900">{decode(`${Props.detail}`,{level:'html5'})}</p>
+      <p className="text-gray-900">{decode(`${Props.detail}`,{level:'html5'})} | {correctAnswer}</p>
         <div className="answers flex">
           {
             answers.map(a => (
-              <TriviaAnswer index={a.id} detail={a.text} selected={a.isSelected} toggle={toggle} answered={answered} />
+              <TriviaAnswer 
+                index={a.id} 
+                detail={a.text} 
+                selected={a.isSelected} 
+                toggle={toggle} 
+                answered={answered}
+                gameOver = {Props.gameOver} 
+                correctAnswer = {Props.correctAnswer}
+              />
             )) 
           }
       </div>
