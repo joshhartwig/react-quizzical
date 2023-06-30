@@ -46,17 +46,19 @@ function App() {
   },[])
 
   return (
-    <>
+    <div className='app'>
+      <div className="absolute top-1 -right-24 w-72 h-72 bg-yellow-300 rounded-full opacity-70 mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>  
     {
       !playing ? <div className="text-center flex flex-col h-screen items-center justify-center">
-      <h1 className="text-xl text-gray-900 mb-8">Quizzical</h1>
+      <h1 className="text-xl text-sky-950 mb-8">Quizzical</h1>
       
       <p className="w-3/5 mb-8">Quizzical is a quiz game that asks you a set of questions. You get scored based on the amount of correct answer you pick. Click Start Quiz to begin</p>
-      <button className="bg-gray-500 text-gray-50 p-3 rounded-lg" onClick={()=> setPlaying(true)}>Start Quiz</button>
+      <button className="bg-gray-600 text-sky-50 p-4 rounded-lg" onClick={()=> setPlaying(true)}>Start Quiz</button>
     </div> : <Quiz questions={quizData}/> 
     }
+    <div className="absolute bottom-1 -left-24 w-72 h-72 bg-purple-300 rounded-full opacity-70 mix-blend-multiply filter blur-xl animate-blob"></div>
       
-    </>
+    </div>
   )
 }
 

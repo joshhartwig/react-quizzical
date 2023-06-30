@@ -12,22 +12,31 @@ interface Props {
 }
 
 const TriviaAnswer: React.FC<Props> = (Props) => {
+  let bgClass;
+
+  if(Props.gameOver) {
+    if(Props.selected) {
+      bgClass = "bg-orange-500"
+    } else if(Props.detail === Props.correctAnswer) {
+      bgClass = "bg-gray-500" 
+    } else {
+      bgClass = "bg-white-50"
+    }
+  } else {
+    bgClass = Props.selected ? "bg-blue-500 text-blue-900" : "bg-white-100 text-gray-900"
+  }
   return (
     <div className="answer">
       {
         Props.answered ? 
         <div
-        className={`${Props.selected ? "bg-orange-500 text-gray-800" : "bg-blue-100 text-gray-900"} mb-1 border border-gray-500 rounded-lg m-2 p-2`}>{decode(Props.detail)}</div> : 
+        className={`${bgClass} mb-1 border border-gray-500 rounded-lg m-2 p-2`}>{decode(Props.detail)}</div> : 
           <div
           onClick={()=> {
             Props.toggle(Props.index)
           }} 
-          className={`${Props.selected ? "bg-blue-500 text-gray-50" : "bg-blue-100 text-gray-900"} mb-1 border border-gray-500 rounded-lg m-2 p-2`}>{decode(Props.detail)}</div>
+          className={`${bgClass} mb-1 border border-gray-500 rounded-lg m-2 p-2`}>{decode(Props.detail)}</div>
       }
-
-      // game over 
-          // if selected and correct ? orange : correct ? grey : white
-
     </div>
   )
 }
