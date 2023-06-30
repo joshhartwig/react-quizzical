@@ -3,7 +3,8 @@ import { Question } from '../types/Question'
 import TriviaQuestion from './TriviaQuestion'
 
 interface Props {
-  questions: Question[]
+  questions: Question[],
+  reset: () => void,
 }
 
 const Quiz: React.FC<Props> = (Props) => {
@@ -17,8 +18,8 @@ const Quiz: React.FC<Props> = (Props) => {
 
   // reset the game state
   const toggleReset = () => {
-    
-    setCorrectAnswerCount(0);
+    setCorrectAnswerCount(0)
+    Props.reset()
   }
 
   // increments our correct answer count so we can display the correct answers below
@@ -38,14 +39,14 @@ const Quiz: React.FC<Props> = (Props) => {
         !gameOver ?
             <button onClick={() => {
             toggleGameOver()
-            }} className="text-gray-50 bg-slate-800 rounded-lg p-4">Check Answers</button>
+            }} className="text-gray-50 bg-slate-500 rounded-lg p-4">Check Answers</button>
              : 
           <p className=" text-lg mb-4">
               You have answered {correctAnswerCount} answers correct out of {Props.questions.length}
               <span className="ml-4">
                 <button onClick={() => {
                   toggleReset()
-                }} className="text-sky-50 bg-gray-600 rounded-lg p-4">Next Match</button></span>
+                }} className="text-sky-50 bg-slate-500 rounded-lg p-4">Next Match</button></span>
           </p>   
       }
       </div>

@@ -14,18 +14,13 @@ interface TriviaQuestion {
   incorrect_answers: string[]
 }
 
-
-
-
 function App() {
   const [quizData, setQuizData] = useState<Question[]>([])
   const [playing, setPlaying] = useState<boolean>(false)
 
-  useEffect(()=> {
+  const fetchQuestions = async () => {
     const url = 'https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple';
-    
-    const fetchQuestions = async () => {
-      const res = await fetch(url)
+    const res = await fetch(url)
       const data = await res.json()
       const mappedQuestions: Question[] = data.results.map((q:TriviaQuestion, index: number) => {
         const answers: Answer[] = [...q.incorrect_answers, q.correct_answer].map((answer,idx) => {
@@ -39,9 +34,15 @@ function App() {
           answered: false
         }
       })
-      setQuizData(mappedQuestions)
-    }
+    setQuizData(mappedQuestions)
+  }
 
+  const resetGame = () => {
+    setPlaying(false)
+    fetchQuestions()
+  }
+
+  useEffect(()=> {
     fetchQuestions();
   },[])
 
@@ -50,11 +51,11 @@ function App() {
       <div className="absolute top-1 -right-24 w-72 h-72 bg-yellow-300 rounded-full opacity-70 mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>  
     {
       !playing ? <div className="text-center flex flex-col h-screen items-center justify-center">
-      <h1 className="text-xl text-sky-950 mb-8">Quizzical</h1>
+      <h1 className="text-5xl font-title text-sky-950 mb-8">Quizzical</h1>
       
-      <p className="w-3/5 mb-8">Quizzical is a quiz game that asks you a set of questions. You get scored based on the amount of correct answer you pick. Click Start Quiz to begin</p>
-      <button className="bg-gray-600 text-sky-50 p-4 rounded-lg" onClick={()=> setPlaying(true)}>Start Quiz</button>
-    </div> : <Quiz questions={quizData}/> 
+      <p className="w-3/5 mb-8 font-display text-xl">Quizzical is a quiz game that asks you a set of questions. You get scored based on the amount of correct answers you pick. Click Start Quiz to begin</p>
+      <button className="bg-slate-500 text-sky-50 p-4 rounded-lg" onClick={()=> setPlaying(true)}>Start Quiz</button>
+    </div> : <Quiz questions={quizData} reset={resetGame}/> 
     }
     <div className="absolute bottom-1 -left-24 w-72 h-72 bg-purple-300 rounded-full opacity-70 mix-blend-multiply filter blur-xl animate-blob"></div>
       

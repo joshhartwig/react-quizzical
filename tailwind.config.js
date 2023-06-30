@@ -6,7 +6,8 @@ export default {
   ],
   theme: {
     fontFamily: {
-      display: ["Inter", "sans-serif"],
+      display: ["Inter"],
+      title: ["Karla"],
     },
     extend: {},
   },

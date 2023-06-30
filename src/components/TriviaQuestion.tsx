@@ -52,9 +52,9 @@ const TriviaQuestion : React.FC<Props> = (Props) => {
 
   return (
     
-    <div className="w-2/3 m-6">
+    <div className="w-2/3 m-6 font-display text-lg">
       
-      <p className="text-gray-900">{decode(`${Props.detail}`,{level:'html5'})}</p>
+      <p className="text-blue-950">{decode(`${Props.detail}`,{level:'html5'})}</p>
         <div className="answers flex">
           {
             answers.map(a => (
