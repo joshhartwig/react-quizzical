@@ -8,7 +8,7 @@ Another final project from Scrimba, you are presented a mockup and need to build
 
 ## Live Demo
 
-* 
+[https://shiny-medovik-ccdee9.netlify.app]
 
 ## Possible Enhancements
 
